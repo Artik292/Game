@@ -1,7 +1,7 @@
 <?php
-
+session_start();
 require 'vendor/autoload.php';
-
+$n = 9090;
 $app = new \atk4\ui\App('Artur');
 $app->initLayout('Centered');
 
@@ -13,10 +13,13 @@ $app->initLayout('Centered');
   $col_3 = $columns->addColumn(3);
 
   $clicker = $col_2->add(["Button","25","green fluid big"]);
-  $clicker->on('click', function($clicker) {
-    //$clicker->set("Test");
-    $reload = new \atk4\ui\jsReload($clicker, [$clicker->name => 'ok']);
-    return $clicker->js(true, $reload);
-    //$clicker->js()->reload();
-    //return new \atk4\ui\jsReload($clicker);
-  });
+  $label = $col_2->add(["Button",$_SESSION['user_id']]);
+
+  $save = $col_2->add(["Button","Save","blue big"]);
+
+
+  // $b = $app->add(["Button","0"]);
+  // $clicker->on('click', function ($b) {
+  //     $GLOBALS['n'] = $GLOBALS['n']+1;
+  //     return $b->text($GLOBALS['n']);
+  // });

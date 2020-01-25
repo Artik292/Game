@@ -1,7 +1,1 @@
-vendor
-/dist
-*.bak
-.DS_Store
-/run.bat
-/run.sh
-Agile Toolkit.app
+vendor/
