@@ -17,6 +17,8 @@ $form->onSubmit(function($form) use($model) {
   $nickname = $form->model['nickname'];
   $form->model->save();
   $model->tryLoadBy('nickname',$nickname);
+  $_SESSION['nickname'] = $model["nickname"];
   $_SESSION["user_id"] = $model->id;
+  $_SESSION['clicker_count'] = 0;
   return new \atk4\ui\jsExpression('document.location = "main.php" ');
 });

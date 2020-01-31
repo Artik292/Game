@@ -15,6 +15,7 @@ class User extends \atk4\data\Model {
         $this->addField("name");
         $this->addField("surname");
         $this->addField("email",["required"=>TRUE]);
+        $this->addField("clicker_count");
         $this->addField("password",["type"=>"password","required"=>TRUE]);
     }
 
