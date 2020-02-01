@@ -18,5 +18,4 @@ class User extends \atk4\data\Model {
         $this->addField("clicker_count");
         $this->addField("password",["type"=>"password","required"=>TRUE]);
     }
-
 }
