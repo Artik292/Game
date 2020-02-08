@@ -15,10 +15,15 @@ $model = new User($db);
 
 $form->onSubmit(function($form) use($model) {
   $nickname = $form->model['nickname'];
-  $form->model->save();
-  $model->tryLoadBy('nickname',$nickname);
-  $_SESSION['nickname'] = $model["nickname"];
-  $_SESSION["user_id"] = $model->id;
-  $_SESSION['clicker_count'] = 0;
-  return new \atk4\ui\jsExpression('document.location = "main.php" ');
+  $model->tryLoadby("nickname",$nickname);
+  if (isset($model->id)) {
+    return new atk4\ui\jsNotify(['content'=>'Nickname already in use.','color'=>'red']);
+  } else {
+    $form->model->save();
+    $model->unload();
+    $model->tryLoadBy('nickname',$nickname);
+    $_SESSION["user_id"] = $model->id;
+    return new \atk4\ui\jsExpression('document.location = "main.php" ');
+  }
+
 });
