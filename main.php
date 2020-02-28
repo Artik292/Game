@@ -3,6 +3,16 @@
   <head>
     <meta charset="utf-8">
 
+    <script>
+    window.onload = function() {
+        var click = document.getElementById("clicke");
+        var a = "<?=session_start() ?>"
+        var val = "<?= $_SESSION['cookie']; ?>";
+        console.log(val);
+        click.value = val;
+    }
+    </script>
+
   </head>
   <body>
 
@@ -10,11 +20,16 @@
 </html>
 
 <?php
-session_start();
 require 'vendor/autoload.php';
-//require 'connection.php';
+require 'connection.php';
 $app = new \atk4\ui\App('Artur');
 $app->initLayout('Centered');
+$user = new User($db);
+$user->load($_SESSION['user_id']);
+//$user->load(1);
+$_SESSION['cookie'] = $user['clicker_count'];
+$user->unload();
+
 
 //$model = new User($db);
 //$model->load($_SESSION['user_id']);
@@ -37,7 +52,7 @@ $a = 10;
   //$clicker->js('click', new \atk4\ui\jsReload($val, ['val' => $val->jsInput()->val(new \atk4\ui\jsExpression('parseInt([])+1234', [$val->jsInput()->val()]), $val->jsInput()->focus())]));
   $slicer = $col_2->add(['View','template' => new \atk4\ui\Template('
 <div id="{$_id}" class="ui statistic">
-  <input type="button" id="clicke" value="1" onclick=Clicker() style="width:500px;height:100px;background-color:green;color:white;font-size:35px;">
+  <input type="button" id="clicke" value=0 onclick=Clicker() style="width:500px;height:100px;background-color:green;color:white;font-size:35px;">
 </div>
 <script>
   function Clicker() {
@@ -65,19 +80,21 @@ $col_2->add(['ui'=>'hidden divider']);
 
   //$label = $col_2->add(["Button",$_SESSION['user_id']]);
 
-  //$save = $col_2->add(["Button","Save","blue big"]);
-
   $save = $col_2->add(['View','template' => new \atk4\ui\Template('
-  <script>
-    function Save() {
-      var for_save = document.getElementById("clicke");
-      //<?php /*$_SESSION["WORK!"]*/ $sav= ?> click.value;
-      console.log(document.getElementById("clicke").value);
-    }
-  </script>
 <div id="{$_id}" class="ui statistic">
-  <input type="button" value=Save onclick=Save()>
-</div>')]);
+  <input type="button" value="Save" onclick=Save() style="width:500px;height:100px;background-color:green;color:white;font-size:35px;">
+</div>
+<script>
+  function Save() {
+    var click = document.getElementById("clicke");
+    var link = \'save.php?val=\'+click.value;
+    window.open(link);
+  }
+</script>')]);
+  /*$save->on('click', function ($m) {
+    $_SESSION['tmp'] = $
+      //['val' => $val->jsInput()->val(new \atk4\ui\jsExpression('parseInt([])+1234', [$val->jsInput()->val()]), $val->jsInput()->focus())]);
+  });*/
 
   /*$save->on('click', function ($m){
     <html>
