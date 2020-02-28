@@ -2,6 +2,6 @@
 
 session_start();
 
-echo $_SESSION["i"];
+var_dump($_SESSION["WORK!"]);
 
-$_SESSION["i"] = 1;
+//$_SESSION["i"] = 1;
