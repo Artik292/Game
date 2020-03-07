@@ -5,7 +5,7 @@
     <script>
     window.onload = function() {
         var click = document.getElementById("clicke");
-        var a = "<?=session_start() ?>"
+        var a = "<?=session_start(); ?>"
         var val = "<?= $_SESSION['cookie']; ?>";
         click.value = val;
     }
