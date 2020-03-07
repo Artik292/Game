@@ -60,7 +60,3 @@ $col_2->add(['ui'=>'hidden divider']);
 
 $exit = $app->add(['Button',"Exit","red"]);
 $exit->link(["exit"]);
-
-$x2 = $col_3->add(["Button","click x2","massive inverted yellow","icon"=>"france flag"]);
-
-$pus = $col_3->add(["Button","+0.5 cli/sek",]);
